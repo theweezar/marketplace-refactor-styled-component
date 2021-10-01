@@ -1,27 +1,30 @@
-import './index.css';
-import styled from 'styled-components';
-import { propStyle, margin } from './components/global/styled';
-
-
-const Title = styled.h1`
-  font-size: 1.5em;
-  text-align: center;
-  color: palevioletred;
-  ${margin({
-    lg: '400px 0 0 0',
-    md: '150px 0 0 0'
-  })}
-`;
-
-const Wrapper = styled.section`
-  background: papayawhip;
-`;
+import { ThemeProvider } from "styled-components";
+import { BrowserRouter, Route } from "react-router-dom";
+import { Fragment } from "react";
+import { Helmet } from "react-helmet";
+import { WRAPTHEME } from "./components/global/theme";
+import { MarketplaceLayout } from "./components/layouts/MarketplaceLayout";
+import { MarketplaceBody } from "./components/layouts/MarketplaceBody";
+import { GlobalStyle } from "./components/global/GlobalStyles";
 
 function App() {
   return (
-    <Wrapper m-lg-4rem p-md-8rem>
-      <Title>Hello World, this is my first styled component!</Title>
-    </Wrapper>
+    <ThemeProvider theme={WRAPTHEME}>
+      <BrowserRouter>
+        <Fragment>
+          <GlobalStyle/>
+          <Route path="/">
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Marketplace</title>
+            </Helmet>
+            <MarketplaceLayout>
+              <MarketplaceBody/>
+            </MarketplaceLayout>
+          </Route>
+        </Fragment>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 

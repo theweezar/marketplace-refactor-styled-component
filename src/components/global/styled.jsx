@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-const breakPoints = {
+export const BREAKPOINTS = {
   xs: '0px',
   sm: '576px',
   md: '768px',
@@ -15,13 +15,13 @@ const breakPoints = {
   s4k: '4096px'
 };
 
-const attributes = {
+const ATTRIBUTES = {
   m: 'margin',
   p: 'padding'
 }
 
-const _attrs = `(${_.keys(attributes).toString().replace(/,/g, '|')})`;
-const _bpoints = `(${_.keys(breakPoints).toString().replace(/,/g, '|')})`;
+const _attrs = `(${_.keys(ATTRIBUTES).toString().replace(/,/g, '|')})`;
+const _bpoints = `(${_.keys(BREAKPOINTS).toString().replace(/,/g, '|')})`;
 
 /**
  * Remove comma and parse all line to one
@@ -35,7 +35,7 @@ const removeComma = (src) => {
 
 export const mQuery = (breakpoint, attribute, value) => {
   return `
-    @media only screen and (min-width: ${breakpoint}) {
+    @media (min-width: ${breakpoint}) {
       ${attribute}: ${value};
     }
   `;
@@ -48,22 +48,61 @@ export const mQuery = (breakpoint, attribute, value) => {
  * @param {any} props Props
  * @returns Css styled string
  */
-export const propStyle = (props) => {
+export const p2style = (props) => {
   const _units = '(\\d+)(px|em|rem)';
   const _matches = _.keys(props).toString().match(RegExp(`${_attrs}-${_bpoints}-${_units}`, 'g'));
   const _styles = _matches.toString().replace(RegExp(`${_attrs}-${_bpoints}-${_units}`, 'g'), ($1, $2, $3, $4, $5) => {
-    return mQuery(breakPoints[$3], attributes[$2], $4 + $5);
+    return mQuery(BREAKPOINTS[$3], ATTRIBUTES[$2], $4 + $5);
   });
   return removeComma(_styles);
 };
 
 export const margin = (styles) => {
   const _styles = _.keys(styles).toString().replace(RegExp(_bpoints, 'g'), ($1) => {
-    return mQuery(breakPoints[$1], 'margin', styles[$1]);
+    return mQuery(BREAKPOINTS[$1], 'margin', styles[$1]);
   });
   return removeComma(_styles);
 };
 
-export const padding = () => {
+export const padding = (styles) => {
+  const _styles = _.keys(styles).toString().replace(RegExp(_bpoints, 'g'), ($1) => {
+    return mQuery(BREAKPOINTS[$1], 'margin', styles[$1]);
+  });
+  return removeComma(_styles);
+};
 
+export const query = (breakpoint, styles) => {
+  return `
+    @media (min-width: ${breakpoint}) {
+      ${styles}
+    }
+  `;
+};
+
+export const sm = (styles) => {
+  return query(BREAKPOINTS.sm, styles);
+};
+
+export const md = (styles) => {
+  return query(BREAKPOINTS.md, styles);
+};
+
+export const lg = (styles) => {
+  return query(BREAKPOINTS.lg, styles);
+};
+
+export const xl = (styles) => {
+  return query(BREAKPOINTS.xl, styles);
+};
+
+export const xml = (styles) => {
+  return query(BREAKPOINTS.xml, styles);
+};
+
+export const xxl = (styles) => {
+  return query(BREAKPOINTS.xxl, styles);
+};
+
+export const fhd = (styles) => {
+  return query(BREAKPOINTS.fhd, styles);
 };
