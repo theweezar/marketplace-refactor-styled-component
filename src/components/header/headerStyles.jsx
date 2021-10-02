@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { Flex } from "../global/display/Display";
 import { Text } from "../global/text/Text";
 import { FixedContainer } from "../global/display/Position";
+import { List } from "../global/list/List";
+import { DefaultButton } from "../global/button/Button";
 
 export const Navigator = styled.div`
   background-color: ${props => props.theme.colorgray6};
@@ -27,8 +29,13 @@ export const RightSideBar = styled(FixedContainer)`
   background-color: ${props => props.theme.colorgray5};
   top: 0;
   bottom: 0;
-  right: 0;
+  right: ${props => props.openSideBar ? '0' : '-100%'};
+  transition: 0.25s;
 `;
+
+export const RSBList = styled(List)`
+  margin-top: 40px;
+`
 
 export const RSBLink = styled(Link)`
   padding: 12px 24px 12px 50px;
@@ -41,3 +48,17 @@ export const RSBLink = styled(Link)`
 export const RSBText = styled(Text)`
   margin-left: 16px;
 `
+
+export const LoginButtonWrapper = styled.div`
+  padding: 12px 24px 12px 50px;
+`
+
+export const LoginButton = styled(DefaultButton)`
+  margin-top: 32px;
+  font-size: 16px;
+  padding: 8px 20px;
+  border: 1px solid ${props => props.theme.colorprimary4};
+  background-color: ${props => props.theme.colorprimary4};
+  border-radius: 4px;
+  
+`;
