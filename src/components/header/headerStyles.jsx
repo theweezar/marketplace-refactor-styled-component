@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { md } from "../global/styled";
 import { Flex } from "../global/display/Display";
 import { Text } from "../global/text/Text";
 import { FixedContainer } from "../global/display/Position";
@@ -21,6 +22,9 @@ export const HambugerButton = styled(Flex)`
   color: white;
   font-size: 20px;
   margin-left: auto;
+  ${md(`
+    display: none;
+  `)}
 `;
 
 export const RightSideBar = styled(FixedContainer)`
@@ -60,5 +64,5 @@ export const LoginButton = styled(DefaultButton)`
   border: 1px solid ${props => props.theme.colorprimary4};
   background-color: ${props => props.theme.colorprimary4};
   border-radius: 4px;
-  
 `;
+
