@@ -10,6 +10,7 @@ export const Absolute = styled.div`
   right: ${props => props.right || ''};
   bottom: ${props => props.bottom || ''};
   left: ${props => props.left || ''};
+  width: ${props => props.width || ''};
 `;
 
 export const Fixed = styled(Absolute)`

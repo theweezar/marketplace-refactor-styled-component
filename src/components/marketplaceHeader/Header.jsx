@@ -1,22 +1,32 @@
+import _ from "lodash";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useDetectClickOutside } from 'react-detect-click-outside';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { AiOutlineDashboard, AiTwotoneShop } from 'react-icons/ai';
-import { FaAngleDown } from 'react-icons/fa';
 import { FiHelpCircle } from 'react-icons/fi';
 import { FaProductHunt } from 'react-icons/fa';
 import { BiLogIn } from 'react-icons/bi';
 import { IconImage24, Image } from "../global/image/Image";
-import { Button3E } from "../global/button/Button";
+import { Button, Button3E } from "../global/button/Button";
 import { Text } from "../global/text/Text";
 import { Navigator, Logo, HambugerButton, RightSideBar, RSBList, RSBLink, RSBText, LoginButtonWrapper, LoginButton } from "./headerStyles";
-import { CategoryNav, CategoryToggleButton } from "./categoryNavStyles";
-import { Dropdown } from "../global/dropdown";
+import { CategoryDropdownWrapper, CategoryDropdown, CategoryItem, CategoryNav, CategoryToggleButton, FilterButton, CategoryNavBarWrapper, CategoryNavBarButton, CategoryNavBarActive } from "./categoryNavStyles";
+import { Dropdown3E } from "../global/dropdown";
 import { Item } from "../global/list/List";
 import { Flex } from "../global/display/Display";
 import _logo from "../../static/images/logo.png";
 import _tabAxie from "../../static/images/tab-axie.png";
+import _tabLand from '../../static/images/tab-land.png';
+import _tabItem from '../../static/images/tab-item.png';
+import _tabBundle from '../../static/images/tab-bundle.png';
+
+const categories = [
+  { id: Math.random().toString(36).substr(2, 9), mid: 'Axies', start: <IconImage24 src={_tabAxie}/>, to: 'axies' },
+  { id: Math.random().toString(36).substr(2, 9), mid: 'Lands', start: <IconImage24 src={_tabLand}/>, to: 'lands' },
+  { id: Math.random().toString(36).substr(2, 9), mid: 'Items', start: <IconImage24 src={_tabItem}/>, to: 'items' },
+  { id: Math.random().toString(36).substr(2, 9), mid: 'Bundles', start: <IconImage24 src={_tabBundle}/>, to: 'bundles' },
+];
 
 const RightSideBarContainer = ({ openSideBar, setOpenSideBar }) => {
   const items = [
@@ -63,16 +73,34 @@ const RightSideBarContainer = ({ openSideBar, setOpenSideBar }) => {
 
 const CategoryDropDown = () => {
   return (
-    <Dropdown>
-      <Dropdown.Toggle template={CategoryToggleButton} to="">
-        <IconImage24 src={_tabAxie}/>
-        <Text>Login</Text>
-        <FaAngleDown/>
-      </Dropdown.Toggle>
-      {/* <div>
-        ec
-      </div> */}
-    </Dropdown>
+    <CategoryDropdownWrapper>
+      <Dropdown3E
+        menu={categories}
+        selected="0"
+        templateToggle={CategoryToggleButton}
+        templateMenu={CategoryDropdown}
+        templateItem={CategoryItem}
+      />
+    </CategoryDropdownWrapper>
+  );
+};
+
+const CategoryNavBar = () => {
+  const [_selected, setSelected] = useState(0);
+  return (
+    <CategoryNavBarWrapper>
+      {_.map(categories, (category, index) => {
+        return (
+          <Link to={category.to} key={category.id} onClick={() => setSelected(index)}>
+            <Button3E>
+              {category.start}
+              {category.mid}
+            </Button3E>
+            <CategoryNavBarActive bottom="0" left="0" active={_selected === index ? true : false}/>
+          </Link>
+        );
+      })}
+    </CategoryNavBarWrapper>
   );
 };
 
@@ -92,7 +120,11 @@ export const Header = () => {
         </HambugerButton>
       </Navigator>
       <CategoryNav justify-content="space-between">
-        <CategoryDropDown/>
+        <CategoryDropDown />
+        <Button template={FilterButton}>
+          Filter
+        </Button>
+        <CategoryNavBar />
       </CategoryNav>
     </>
   )

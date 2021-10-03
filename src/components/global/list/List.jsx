@@ -12,6 +12,7 @@ export const List = styled.ul`
 
 export const Item = styled.li`
   display: list-item;
+  width: 100%;
 `;
 
 export const ListTemplate = ({...props}) => {

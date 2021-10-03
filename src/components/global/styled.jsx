@@ -66,7 +66,7 @@ export const margin = (styles) => {
 
 export const padding = (styles) => {
   const _styles = _.keys(styles).toString().replace(RegExp(_bpoints, 'g'), ($1) => {
-    return mQuery(BREAKPOINTS[$1], 'margin', styles[$1]);
+    return mQuery(BREAKPOINTS[$1], 'padding', styles[$1]);
   });
   return removeComma(_styles);
 };
