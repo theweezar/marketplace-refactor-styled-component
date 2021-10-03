@@ -3,7 +3,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import { Fragment } from "react";
 import { WRAPTHEME } from "./components/global/theme";
 import { MarketplaceLayout } from "./components/layouts/MarketplaceLayout";
-import { MarketplaceBody } from "./components/layouts/MarketplaceBody";
+import { MarketplaceBody } from "./components/marketplaceBody/MarketplaceBody";
 import { GlobalStyle } from "./components/global/GlobalStyles";
 
 function App() {
