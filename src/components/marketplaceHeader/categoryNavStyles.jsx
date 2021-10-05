@@ -3,7 +3,6 @@ import { Flex } from "../global/display/Display";
 import { DefaultButton, DefaultLink } from "../global/button/Button";
 import { List } from "../global/list/List";
 import { md, padding } from "../global/styled";
-import { Link } from "react-router-dom";
 import { Absolute } from "../global/display/Position";
 
 export const CategoryNav = styled(Flex)`
@@ -12,7 +11,6 @@ export const CategoryNav = styled(Flex)`
     md: '0'
   })}
   background-color: ${props => props.theme.colorgray5};
-  border-top: 1px solid ${props => props.theme.colorgray3};
   border-bottom: 1px solid ${props => props.theme.colorgray5};
 `;
 
@@ -29,7 +27,6 @@ export const CategoryToggleButton = styled(DefaultButton)`
   border-radius: 4px;
   width: 160px;
   font-weight: 700;
-  font-size: 16px;
 `;
 
 export const CategoryDropdown = styled(List)`
@@ -40,10 +37,12 @@ export const CategoryDropdown = styled(List)`
 export const CategoryItem = styled(DefaultLink)`
   border: none;
   font-weight: 700;
+  width: 100%;
 `
 
 export const FilterButton = styled(DefaultButton)`
   padding: 8px 20px;
+  border-radius: 4px;
   ${md(`
     display: none;
   `)}

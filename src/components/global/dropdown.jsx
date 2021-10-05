@@ -7,13 +7,14 @@ import { AbsoluteContainer } from './display/Position';
 import { useState } from 'react';
 import { randomString } from '../../scripts/randomHelpers';
 
-export const Dropdown3E = ({ selected, menu, templateToggle, templateMenu, templateItem }) => {
+export const Dropdown3E = ({ selected, menu, templateToggle, templateMenu, templateItem, onItemClick }) => {
   const [isDrop, setIsDrop] = useState(false);
-  const [_selected, setSelected] = useState(selected);
+  const [_selected, setSelected] = useState(selected || 0);
   const _containerStyle = {
     width: '100%',
     display: isDrop ? 'block' : 'none',
-    marginTop: '4px'
+    marginTop: '4px',
+    zIndex: 1000
   };
   const ref = useDetectClickOutside({
     onTriggered: () => {
@@ -23,6 +24,9 @@ export const Dropdown3E = ({ selected, menu, templateToggle, templateMenu, templ
   const itemOnClick = (index, event) => {
     setSelected(index);
     setIsDrop(false);
+    if (typeof onItemClick === 'function') {
+      onItemClick(event);
+    }
   }
   
   return (

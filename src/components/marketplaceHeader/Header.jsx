@@ -88,7 +88,7 @@ const CategoryDropDown = () => {
 const CategoryNavBar = () => {
   const [_selected, setSelected] = useState(0);
   return (
-    <CategoryNavBarWrapper>
+    <CategoryNavBarWrapper id="category-navigator">
       {_.map(categories, (category, index) => {
         return (
           <Link to={category.to} key={category.id} onClick={() => setSelected(index)}>
@@ -108,7 +108,7 @@ export const Header = () => {
   const [openSideBar, setOpenSideBar] = useState(false);
   return (
     <>
-      <Navigator>
+      <Navigator id="first-navigator">
         <RightSideBarContainer openSideBar={openSideBar} setOpenSideBar={setOpenSideBar}/>
         <Logo>
           <Link to="/">
@@ -119,7 +119,7 @@ export const Header = () => {
           <GiHamburgerMenu onClick={() => setOpenSideBar(true)}/>
         </HambugerButton>
       </Navigator>
-      <CategoryNav justify-content="space-between">
+      <CategoryNav justify-content="space-between" id="second-navigator">
         <CategoryDropDown />
         <Button template={FilterButton}>
           Filter

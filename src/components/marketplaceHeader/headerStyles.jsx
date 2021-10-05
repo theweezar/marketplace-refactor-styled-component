@@ -35,6 +35,7 @@ export const RightSideBar = styled(FixedContainer)`
   bottom: 0;
   right: ${props => props.openSideBar ? '0' : '-100%'};
   transition: 0.25s;
+  z-index: 1020;
 `;
 
 export const RSBList = styled(List)`

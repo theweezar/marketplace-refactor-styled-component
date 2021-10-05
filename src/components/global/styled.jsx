@@ -106,3 +106,10 @@ export const xxl = (styles) => {
 export const fhd = (styles) => {
   return query(BREAKPOINTS.fhd, styles);
 };
+
+export const flex = (value) => {
+  return `
+    flex: 0 0 ${value};
+    max-width: ${value};
+  `;
+}
